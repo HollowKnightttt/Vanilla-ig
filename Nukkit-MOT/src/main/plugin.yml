@@ -1,0 +1,6 @@
+name: HelloWorldPlugin
+main: com.example.helloworld.HelloWorldPlugin
+version: "1.0.0"
+api: ["1.0.0"]
+author: YourName
+description: My first Nukkit-MOT plugin
