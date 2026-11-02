@@ -1,4 +1,4 @@
-package petterim1.customblockexample;
+package hollowkightttt.vanilla-ig;
 
 import cn.nukkit.block.custom.CustomBlockManager;
 import cn.nukkit.block.custom.container.CustomBlock;
