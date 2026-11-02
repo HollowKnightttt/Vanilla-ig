@@ -1,0 +1,22 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "VanillaBlocks-ig",
+    "description": "Vanilla Blocks Adder For Nukkit",
+    "uuid": "9e765479-1ade-462f-8bab-a2b14f2f6e96",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 26, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "928fc4b7-fd01-46f4-9470-f049b0e4972a",
+      "version": [1, 0, 0]
+    }
+  ],
+  "metadata": {
+    "authors": ["Hollowkightttt"],
+    "product_type": "addon",
+    "generated_with": { "jaylydev_manifest_generator": ["1.0.0"] }
+  }
+}
