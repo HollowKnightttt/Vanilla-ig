@@ -1,0 +1,14 @@
+name: vanilla-ig
+main: hollowkightttt.vanilla-ig.Main
+version: "${pom.version}"
+api: ["1.0.20"]
+author: hollowkightttt
+load: STARTUP
+
+commands:
+  test:
+    permission: test
+
+permissions:
+  test:
+    default: op
