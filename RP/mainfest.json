@@ -1,0 +1,21 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Vanilla ig texture",
+    "description": "Texture",
+    "uuid": "c946ec13-725b-40dc-bd3f-d4d0085ad83c",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 26, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "47d71156-b847-4e24-b80e-4631dd9dacda",
+      "version": [1, 0, 0]
+    }
+  ],
+  "metadata": {
+    "authors": ["Hollowkightttt"],
+    "generated_with": { "jaylydev_manifest_generator": ["1.0.0"] }
+  }
+}
