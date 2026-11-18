@@ -7,29 +7,46 @@ import cn.nukkit.block.custom.CustomBlockManager;
 import cn.nukkit.item.Item;
 import cn.nukkit.plugin.PluginBase;
 
-public class Main extends PluginBase {
-
-    static Main INSTANCE;
-
-    public Main() {
-        INSTANCE = this;
-    }
-
-    @Override
-    public void onEnable() {
-        // Register the custom block definition
-        // Note: Set "load: STARTUP" in plugin.yml
-        CustomBlockManager.get().registerCustomBlock(MyCustomBlock.IDENTIFIER, MyCustomBlock.NUKKIT_ID, () -> new MyCustomBlock());
-    }
-
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        // Test command to give one custom block to player
-        if (commandSender instanceof Player && command.getName().equals("test")) {
-            Item item = Item.get(255 - MyCustomBlock.NUKKIT_ID, 0, 1);
-            ((Player) commandSender).getInventory().addItem(item);
-            commandSender.sendMessage("Gave custom block");
+void registerBlock(int blockId, Class<? extends Block> blockClass) {
+        Block.list[blockId] = blockClass;
+        Block block;
+        try {
+            block = blockClass.newInstance();
+            try {
+                Constructor<?> constructor = blockClass.getDeclaredConstructor(int.class);
+                constructor.setAccessible(true);
+                for (int data = 0; data < (1 << Block.DATA_BITS); ++data) {
+                    int fullId = (blockId << Block.DATA_BITS) | data;
+                    Block.fullList[fullId] = (Block) constructor.newInstance(data);
+                }
+                Block.hasMeta[blockId] = true;
+            } catch (NoSuchMethodException ignore) {
+                for (int data = 0; data < Block.DATA_SIZE; ++data) {
+                    int fullId = (blockId << Block.DATA_BITS) | data;
+                    Block.fullList[fullId] = block;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return true;
-    }
+        Block.solid[blockId] = block.isSolid();
+        Block.transparent[blockId] = block.isTransparent();
+        Block.hardness[blockId] = block.getHardness();
+        Block.light[blockId] = block.getLightLevel();
+        if (block.isSolid()) {
+            if (block.isTransparent()) {
+                if (block instanceof BlockLiquid || block instanceof BlockIce) {
+                    Block.lightFilter[blockId] = 2;
+                } else {
+                    Block.lightFilter[blockId] = 1;
+                }
+            } else {
+                Block.lightFilter[blockId] = 15;
+            }
+        } else {
+            Block.lightFilter[blockId] = 1;
+        }
 }
+
+registerBlock(1423, WOODEN_SLAB) 
+registerBlock() 
